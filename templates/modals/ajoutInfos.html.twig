@@ -1,0 +1,62 @@
+{% block modalAjoutInfos %}
+
+
+
+    <!-- Modal Ajout d'un client -->
+    <div class="modal fade" id="modalAjoutInfos" tabindex="-1" aria-labelledby="ModalInfos" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Ajout d'une infos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="tab-content text-warning" id="nav-tabContent">
+                    {% if car.type == "carrosserie" %}
+                        {% form_theme formC 'bootstrap_5_layout.html.twig' %}
+                        <div class="tab-pane fade show active" id="nav-get" role="tabpanel" aria-labelledby="nav-home-tab">
+                            <div class="modal-body">
+
+                                {{ form_start(formC) }}
+                                <div class="form-group" id="reparation">
+                                    {{ form_row(formC.reparation) }}
+                                </div>
+
+                                <div class="form-group" id="infos">
+                                    {{ form_row(formC.infos) }}
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                                <button type="submit" class="btn btn-primary">Ajouter !</button>
+                            </div>
+                            {{ form_end(formC) }}
+                        </div>
+                    {% endif %}
+                    {%  if car.type == "mecanique" %}
+                        {% form_theme formI 'bootstrap_5_layout.html.twig' %}
+                    <div class="tab-pane fade show active" id="nav-get" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="modal-body">
+
+                            {{ form_start(formI) }}
+                            <div class="form-group" id="reparation">
+                                {{ form_row(formI.reparation) }}
+                            </div>
+
+                            <div class="form-group" id="infos">
+                                {{ form_row(formI.infos) }}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                            <button type="submit" class="btn btn-primary">Ajouter !</button>
+                        </div>
+                        {{ form_end(formI) }}
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Ajout d'un client -->
+{% endblock %}

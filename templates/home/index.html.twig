@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+{% block titre %} Voitures au garage{% endblock %}
+
+{% block body %}
+
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#ModalAjoutVoiture">
+            <i class='bx bx-plus-circle' ></i>  Ajouter une voiture</i>
+        </button> <br><br>
+
+
+
+                    <div class="liste">
+                        {% for voiture in listeVoitures %}
+                            {% if voiture.etat == "rouge"  and voiture.type == "mecanique" %}
+
+                            <a href="{{ path('carInfos', { id : voiture.id })  }}" >
+                            <div class="element">
+
+                                <div class="">
+                                    <img src="uploads/{{ voiture.image.name }}" class="image" alt="image de la voiture">                            </div>
+                                    <div class="texte">
+                                        <p>{{ voiture.marque }} {{ voiture.modele }}</p>
+                                        <p>{{ voiture.client.nom }}</p>
+                                    </div>
+                            </div>
+                            </a>
+
+                            {% endif %}
+
+
+                                {% if voiture.etat == "rouge"  and voiture.type == "carrosserie" %}
+                                    <a href="{{ path('carDetail', { id : voiture.id })  }}" >
+                                        <div class="element type">
+
+                                            <div class="">
+                                                <img src="uploads/{{ voiture.image.name }}" class="image" alt="image de la voiture">                            </div>
+                                            <div class="texte">
+                                                <p>{{ voiture.marque }} {{ voiture.modele }}</p>
+                                                <p>{{ voiture.client.nom }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+
+
+
+
+
+
+        {% block modalAjoutVoiture %}
+            {% include "modals/ajoutVoiture.html.twig" %}
+        {% endblock %}
+
+{% endblock %}

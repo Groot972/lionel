@@ -1,0 +1,74 @@
+{% block modalAjoutVoiture %}
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+    {% form_theme form2 'bootstrap_5_layout.html.twig' %}
+
+
+    <!-- Modal Ajout d'un client -->
+    <div class="modal fade" id="ModalAjoutVoiture" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout d'une voiture</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="getClient" data-bs-toggle="tab" style="color: red" data-bs-target="#nav-get" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Déjà client</button>
+                        <button class="nav-link" id="newClient" data-bs-toggle="tab" style="color: red" data-bs-target="#nav-new" type="button">Nouveau Client</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-get" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="modal-body">
+
+                            {{ form_start(form) }}
+                            <div class="form-group" id="client">
+                                {{ form_row(form.client) }}
+                            </div>
+                            {% block MyformVoiture %}
+                                {% include 'myform/formVoiture.html.twig' %}
+                            {% endblock %}
+                            <div class="form-group">
+                                <label for="marque">Carrosserie / Mécanique : </label>
+                                <select class="form-control" id="type" name="type">
+                                    <option value="carrosserie"> Carrosserie</option>
+                                    <option value="mecanique"> Mécanique</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form.image) }}
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                            <button type="submit" class="btn btn-primary">Ajouter !</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                    <div class="tab-pane fade" id="nav-new" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="modal-body">
+                            {{ form_start(form2) }}
+                            <div class="form-group" id="client">
+                                {{ form_row(form2.nom) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(form2.telephone) }}
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                            <button type="submit" class="btn btn-primary">Ajouter !</button>
+                        </div>
+                        {{ form_end(form2) }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Ajout d'un client -->
+{% endblock %}
+
+

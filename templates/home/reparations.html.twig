@@ -1,0 +1,199 @@
+{% extends 'base.html.twig' %}
+{% block title %}Réparations {{ car.type }}{% endblock %}
+{% block titre %}Réparations ({{ car.type }}){% endblock %}
+
+{% block body %}
+
+    <h2 class="text-center"> {{ car.marque }} {{ car.modele }} de {{ car.client.nom }} </h2>
+    <img src="../uploads/{{ car.image.name }}" class="image-presentation text-center" alt="image de la voiture">
+
+    <!-- Button trigger modal -->
+    <div class="management">
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAjoutReparation">
+                <i class='bx bx-plus-circle'> Réparation</i>
+            </button>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAjoutInfos">
+                <i class='bx bx-plus-circle'></i>  Ajouter une infos</i>
+            </button>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalSuppVoiture{{ car.id }}">
+                <i class='bx bx-trash'>Voiture</i>
+            </button>
+
+
+        <div id="fini">
+
+        </div>
+
+    </div>
+
+    <p> Il vous reste <span id="compteur"></span> réparations à gérer </p>
+
+    <div class="reparations">
+        <!-- Réparations à faire-->
+        <div class="rep a-faire">
+            <div class="rep-head">
+                <button class="bouton" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <h2>A faire <span id="compteurRR"></span> </h2>
+                </button>
+            </div>
+
+            <div class="rep-body">
+                <div class="collapse" id="navbarNavDarkDropdown">
+                    {% for repairs in repair %}
+
+                        {% if repairs.etat == "rouge" %}
+                            <div class="desc" >
+                                <p class="compteurR"> {{ repairs.reparation.libelle }}</p>
+                                <div class="items">
+                                    <i class='bx bxs-timer its' data-bs-toggle="modal" data-bs-target="#modalMod{{ repairs.reparation.id }}"></i>
+                                    {% set present = '' %}
+                                    {% for infos in listeinfos %}
+                                        {% if infos.reparation == repairs.reparation and infos.marqueVoiture == car.marque and infos.modeleVoiture == car.modele %}
+                                            {% set present = 'oui' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if  present == 'oui' %}
+                                        <i class='bx bx-info-circle its' data-bs-toggle="modal" data-bs-target="#modalInfos{{ repairs.reparation.id }}"></i>
+                                    {% endif %}
+                                    <i class='bx bx-trash its' data-bs-toggle="modal" data-bs-target="#modalSupp{{ repairs.reparation.id }}"></i>
+
+                                </div>
+                            </div>
+
+                            {% block modalInfos %}
+                                {% include "modals/infos.html.twig" %}
+                            {% endblock %}
+
+                            {% block modalEtat %}
+                                {% include "modals/modetat.html.twig" %}
+                            {% endblock %}
+
+                            {% block modalSuppReparation %}
+                                {% include "modals/suppReparation.html.twig" %}
+                            {% endblock %}
+
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Réparations en cours-->
+        <div class="rep encours">
+            <div class="rep-head">
+                <button class="bouton" type="button" data-bs-toggle="collapse" data-bs-target="#encours" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <h2>En cours <span id="compteurJR"></span></h2>
+                </button>
+            </div>
+            <div class="rep-body">
+                <div class="collapse" id="encours">
+                    {% for repairs in repair %}
+                        {% if repairs.etat == "jaune" %}
+                            <div class="desc">
+                                <p class="compteurJ"> {{ repairs.reparation.libelle }}</p>
+                                <div class="items">
+                                    <i class='bx bxs-timer its' data-bs-toggle="modal" data-bs-target="#modalMod{{ repairs.reparation.id }}"></i>
+                                    {% set present = '' %}
+                                    {% for infos in listeinfos %}
+                                        {% if infos.reparation == repairs.reparation and infos.marqueVoiture == car.marque and infos.modeleVoiture == car.modele %}
+                                            {% set present = 'oui' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if  present == 'oui' %}
+                                        <i class='bx bx-info-circle its' data-bs-toggle="modal" data-bs-target="#modalInfos{{ repairs.reparation.id }}"></i>
+                                    {% endif %}
+                                    <i class='bx bx-trash its' data-bs-toggle="modal" data-bs-target="#modalSupp{{ repairs.reparation.id }}"></i>
+
+                                </div>
+                            </div>
+                            {{ block('modalInfos') }}
+                            {{ block('modalEtat') }}
+                            {{ block('modalSuppReparation') }}
+
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Réparations fini-->
+        <div class="rep fini">
+            <div class="rep-head">
+                <button class="bouton" type="button" data-bs-toggle="collapse" data-bs-target="#finies" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <h2>Terminées <span id="compteurVR"></span> </h2>
+                </button>
+            </div>
+            <div class="rep-body">
+                <div class="collapse" id="finies">
+                    {% for repairs in repair %}
+                        {% if repairs.etat == "vert" %}
+                            <div class="desc" >
+                                <p class="compteurV"> {{ repairs.reparation.libelle }}</p>
+                                <div class="items">
+
+                                    {% set present = '' %}
+                                    {% for infos in listeinfos %}
+                                        {% if infos.reparation == repairs.reparation and infos.marqueVoiture == car.marque and infos.modeleVoiture == car.modele %}
+                                            {% set present = 'oui' %}
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if  present == 'oui' %}
+                                        <i class='bx bx-info-circle its' data-bs-toggle="modal" data-bs-target="#modalInfos{{ repairs.reparation.id }}"></i>
+                                    {% endif %}
+
+
+                                </div>
+                            </div>
+                            {{ block('modalInfos') }}
+                            {{ block('modalEtat') }}
+                            {{ block('modalSuppReparation') }}
+
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block ModalAjoutInfos %}
+        {% include 'modals/ajoutInfos.html.twig' %}
+    {% endblock %}
+
+    {% block modalAjoutReparation %}
+        {% include "modals/ajoutReparation.html.twig" %}
+    {% endblock %}
+
+    {% block modalsuppVoiture %}
+        {% include "modals/suppVoiture.html.twig" %}
+    {% endblock %}
+
+
+
+    <script>
+
+        let rouge = document.getElementsByClassName("compteurR").length;
+        let jaune = document.getElementsByClassName("compteurJ").length;
+        let vert = document.getElementsByClassName("compteurV").length;
+
+        document.getElementById('compteur').innerHTML = rouge + jaune;
+
+
+
+        if (rouge > 0) { document.getElementById('compteurRR').innerHTML = '('+rouge+')'}
+        if (jaune > 0) { document.getElementById('compteurJR').innerHTML = '('+jaune+')'}
+        if (vert > 0) { document.getElementById('compteurVR').innerHTML = '('+vert+')'}
+
+        if(rouge === 0 && jaune === 0 && vert !== 0){
+            document.getElementById('fini').innerHTML =
+                `<a href="{{ path('departG', {id : car.id}) }}">
+            <button type="button" class="btn btn-outline-success">
+                <i class='bx bxs-check-square'></i>  Voiture terminée</i>
+            </button>
+        </a>`
+        }
+
+    </script>
+
+
+{% endblock %}

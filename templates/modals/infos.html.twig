@@ -1,0 +1,40 @@
+{% block modalInfos %}
+
+    <!-- Modal Infos -->
+    <div class="modal fade" id="modalInfos{{ repairs.reparation.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Infos </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-warning">
+                {% if car.type == "mecanique" %}
+                    {% for infos in listeinfos %}
+                        {% if infos.reparation == repairs.reparation and infos.marqueVoiture == car.marque and infos.modeleVoiture == car.modele %}
+                            <p class="text-primary">{{ infos.infos }}</p><hr>
+                        {% endif %}
+                    {% endfor %}
+
+
+                {% endif %}
+
+                {% if car.type == "carrosserie" %}
+                    {% for infos in listeinfosC %}
+                        {% if infos.reparation == repairs.reparation and infos.marqueVoiture == car.marque and infos.modeleVoiture == car.modele %}
+                            <p class="text-primary">{{ infos.infos }}</p><hr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Infos -->
+
+{% endblock %}

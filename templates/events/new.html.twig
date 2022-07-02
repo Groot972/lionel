@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+{% block title %}Agenda{% endblock %}
+    {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{%  block stylesheets %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+{% endblock %}
+
+
+{% block body %}
+
+<h3>Creer un evenement</h3>
+<div class="container">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+
+    <div class="container">
+        <div class="form-group">
+            <label for="marque">Début : </label>
+            <input class="form-control" type="text" name="start" id="datetime" required/>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-group">
+            <label for="marque">Fin : </label>
+            <input class="form-control" type="text" name="end" id="datetime2" required/>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Ajouter !</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('agenda') }}"><button class="btn btn-secondary">retour</button></a>
+</div>
+
+    <br>
+
+
+
+
+
+
+
+
+
+    <script>
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('#datetime').datetimepicker({
+                format: 'DD-MM-YYYY HH:mm ',
+            });
+            $('#datetime2').datetimepicker({
+                format: 'DD-MM-YYYY HH:mm ',
+            });
+
+    </script>
+{% endblock %}

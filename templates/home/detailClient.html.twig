@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}Détail Client{% endblock %}
+{% block titre %} Détail Client{% endblock %}
+
+{% block body %}
+
+<div class="client">
+    <h2> {{ detail.nom }} </h2>  <i class='bx bx-phone'> </i> {{ detail.telephone }}
+    <br>
+
+    {% for voiture in detail.voitures %}
+        <br>
+        <p>{{ voiture.marque }} {{ voiture.modele }}
+
+            {% if voiture.etat == 'rouge' %}
+                <a href="{{ path('carInfos', {id : voiture.id}) }}">
+                    <button type="button" class="btn btn-outline-success">
+                        <i class='bx bx-refresh' ></i>  Continuer réparation</i>
+                    </button>
+                </a>
+            {% else %}
+                <a href="{{ path('retourG', {id : voiture.id}) }}">
+                    <button type="button" class="btn btn-outline-danger">
+                        <i class='bx bx-refresh' ></i>  Retour au garage</i>
+                    </button>
+                </a>
+            {% endif %}
+        </p>
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Réparation</th>
+                <th scope="col">Date de début</th>
+                <th scope="col">Date de fin</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reparation in voiture.reparationEtats %}
+                <tr>
+                    <td>{{ reparation.reparation.libelle }}</td>
+                    <td>{{ reparation.dateDebut|date('d-m-Y H:i') }}</td>
+                    <td>{{ reparation.dateFin|date('d-m-Y H:i') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <hr>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}

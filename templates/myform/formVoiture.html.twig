@@ -1,0 +1,122 @@
+{% block MyformVoiture %}
+
+
+    <div class="form-group">
+        <label for="marque">Marque : </label>
+        <select class="form-control" id="marque" name="marque">
+            <option value="" disabled selected>Selectionner marque...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="modele">Modèle : </label>
+        <select class="form-control" id="modele" name="modele">
+
+        </select>
+    </div>
+
+
+    <script>
+        let car = [
+            {
+                id : 1,
+                marque : 'Audi',
+                modele : ['Selecionner le modele','A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'Q2', 'Q3', 'Q5', 'Q7', 'Q8', 'R8', 'TT', 'V8']
+            },
+            {
+                id : 2,
+                marque : 'BMW',
+                modele : ['Selecionner le modele','i3', 'i8', 'Série 1', 'Série 2', 'Série 3', 'Série 4', 'Série 5', 'Série 6', 'Série 7', 'Série 8', 'X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7', 'Z1', 'Z3', 'Z4', 'Z8']
+            },
+            {
+                id : 3,
+                marque : 'CITROEN',
+                modele : ['Selecionner le modele','Ax', 'Axel', 'Berlingo', 'Bx', 'C-Crosser', 'C-Elysée', 'C-zero', 'C1', 'C15', 'C2', 'C25', 'C3', 'C35', 'C4', 'C5', 'C6', 'C8', 'CX', 'DS3', 'DS4', 'DS5', 'E-Mehari', 'Evasion', 'Jumper', 'Jumpy', 'Nemo', 'Spacetourer', 'Visa', 'Xantia', 'XM', 'Xsara', 'ZX']
+            },
+            {
+                id : 4,
+                marque : 'FIAT',
+                modele : ['Selecionner le modele','124 Spider', '500', 'Argo', 'Avventura', 'Barchetta', 'Brava', 'Cronos', 'Doblo', 'Ducato', 'Fiorino', 'Freemont', 'Fullback', 'Grande Punto', 'Idea', 'Linea', 'Marea', 'Mobi', 'Panda', 'Punto', 'Qubo', 'Sedici', 'Siena', 'Stilo', 'Strada', 'Talento', 'Tipo', 'Toro', 'Ulysse', 'Uno']
+            },
+            {
+                id : 5,
+                marque : 'FORD',
+                modele : ['Selecionner le modele','B-Max', 'Cougar', 'Courier', 'Ecosport', 'Escort', 'Fiesta', 'Focus', 'Fusion', 'Galaxy', 'GT', 'KA', 'Kuga', 'Maverick', 'Mondeo', 'Puma', 'Ranger', 'S-Max', 'StreetKA', 'Tourneo', 'Transit' ]
+            },
+            {
+                id : 6,
+                marque : 'PEUGEOT',
+                modele : ['Selecionner le modele','106', '107', '108', '205', '206', '207', '208', '301', '306', '307', '308', '406', '407', '408', '504', '508', '607', '806', '807', '1007', '2008', '3008', '4007', '4008', '5008', 'Bipper', 'Boxer', 'Expert', 'Partner' ]
+            },
+            {
+                id : 7,
+                marque : 'RENAULT',
+                modele : ['Selecionner le modele', 'Alaskan', 'Avantime', 'Captur', 'Clio', 'Dokker', 'Duster', 'Espace', 'Fluence', 'Grand Sénic', 'Kadjar', 'Kangoo', 'Koleos', 'Laguna', 'Latitude', 'Lodgy', 'Logan', 'Master', 'Megane', 'Oroch', 'Sandero', 'Scala', 'Scénic', 'Symbol', 'Talisman', 'Trafic', 'Twingo', 'Zoe' ]
+            },
+            {
+                id : 8,
+                marque : 'SEAT',
+                modele : ['Selecionner le modele', 'Alhambra', 'Altea', 'Arona', 'Arosa', 'Cordoba', 'Exeo', 'Ibiza', 'Inca', 'Leon', 'Mii', 'Tarraco', 'Toledo' ]
+            },
+            {
+                id : 9,
+                marque : 'VOLSWAGEN',
+                modele : ['Selecionner le modele','Amarok', 'Ameo', 'Arteon', 'Atlas', 'Beetle', 'Bora', 'Caddy', 'CC', 'Coccinelle', 'Crafter', 'Eos', 'Fox', 'Gol', 'Golf', 'ID.3', 'Jetta', 'LT', 'Lupo', 'Multivan', 'New Beetle', 'Passat', 'Phateon', 'Pointer', 'Polo', 'Santana', 'Saveiro', 'Sirocco', 'Sharan', 'Spacefox', 'T-Cross', 'T-Roc', 'Tiguan', 'Touareg', 'Touran', 'Up', 'Vento' ]
+            }
+        ];
+
+
+        let marque = document.getElementById('marque');
+        let modele = document.getElementById('modele');
+
+            car.forEach((item) =>{
+                let option = document.createElement('option');
+                option.value = item.marque;
+                option.code = item.modele;
+                option.label = item.marque;
+                marque.appendChild(option);
+
+            });
+
+
+            marque.addEventListener('change', ()=> {
+
+                let choice = marque.selectedIndex;  // Récupération de l'index du <option> choisi
+                let tableau = marque.options[choice].code;
+
+                while (modele.options.length > 0){
+                    modele.options.remove(0);
+                }
+
+                tableau.forEach((items)=>{
+                    let options = document.createElement('option');
+                    options.value = items;
+                    options.label = items;
+                    modele.appendChild(options);
+
+                });
+            });
+
+
+            /**
+             modele.addEventListener('change', ()=>{
+                let choice = marque.selectedIndex;
+                let choices = modele.selectedIndex ; // Récupération de l'index du <option> choisi
+                let valeur_cherche = modele.options[choices].value;
+                let marque_choisie = marque.options[choice].value;
+
+                console.log(marque_choisie, valeur_cherche );
+            });
+
+
+
+             **/
+
+
+
+
+
+
+    </script>
+
+{% endblock %}
+

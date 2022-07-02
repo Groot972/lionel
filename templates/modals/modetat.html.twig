@@ -1,0 +1,54 @@
+{% block modalEtat %}
+
+    <!-- Modal modification reparation -->
+    <div class="modal fade" id="modalMod{{ repairs.reparation.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="mod-etat">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modifier l'état de la réparation </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if car.type =="mecanique" %}
+
+                        {% if repairs.etat == "rouge" %}
+                                <p> Êtes-vous sûr de vouloir commencer la réparation ? <br>
+                                <a href="{{ path('jaune', {id : repairs.id })}}"><button type="button" class="btn btn-warning"> Commencer</button></a>
+                        {% endif %}
+
+                        {% if repairs.etat == "jaune" %}
+                                <p> Êtes vous sûr d'avoir terminé la réparation ? <br>
+                                <a href="{{ path('vert', {id : repairs.id })}}"><button type="button" class="btn btn-success"> Terminer </button></a>
+                        {% endif %}
+
+                    {% endif %}
+
+
+                    {% if car.type =="carrosserie" %}
+
+                        {% if repairs.etat == "rouge" %}
+                            <p> Êtes-vous sûr de vouloir commencer la réparation ? <br>
+                            <a href="{{ path('jauneC', {id : repairs.id })}}"><button type="button" class="btn btn-warning"> Commencer</button></a>
+                        {% endif %}
+
+                        {% if repairs.etat == "jaune" %}
+                            <p> Êtes vous sûr d'avoir terminé la réparation ? <br>
+                            <a href="{{ path('vertC', {id : repairs.id })}}"><button type="button" class="btn btn-success"> Terminer </button></a>
+                        {% endif %}
+
+                    {% endif %}
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Fin Modal modification reparation -->
+
+{% endblock %}

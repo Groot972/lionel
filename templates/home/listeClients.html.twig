@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des clients{% endblock %}
+{% block titre %} Clients du garage{% endblock %}
+
+
+
+
+{% block body %}
+
+    <div class="container">
+        <div class="client">
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Nom du client</th>
+                    <th scope="col">Infos</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for client in listeClients %}
+                    <tr>
+                        <td>{{ client.nom }}</td>
+                        <td><a href="{{ path('clientDetail', {id : client.id })}}"> Détails </a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

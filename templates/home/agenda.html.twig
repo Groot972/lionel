@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+{% block title %}Calendrier des rdv{% endblock %}
+{% block titre %} Agenda {% endblock %}
+
+
+{% block body %}
+
+
+<div class="container">
+    <div id="calendrier" class="calendrier" ></div>
+    <a href="{{ path('events_new') }}"><button class="btn btn-primary">Créer un evenement</button> </a>
+</div>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@4.1.0/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@4.1.0/main.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            let calendarEl = document.getElementById('calendrier');
+
+            let calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                themeSystem: 'bootstrap5',
+                locale : 'fr',
+                editable: true,
+
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth, timeGridDay',
+                },
+                height: 340,
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid' ], // https://fullcalendar.io/docs/plugin-index
+                timeZone: 'local',
+                eventTimeFormat: { // like '14:30:00'
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    meridiem: false
+                },
+
+
+                eventClick: function(info) {
+                    console.log(info.event);
+                    let dateS = info.event.start.getDate();
+                    let moisS = info.event.start.getMonth();
+                    let anneeS = info.event.start.getFullYear();
+                    let heureS = info.event.start.getHours();
+                    let minutesS = info.event.start.getMinutes();
+                    let dateE = info.event.end.getDate();
+                    let moisE = info.event.end.getMonth();
+                    let anneeE = info.event.end.getFullYear();
+                    let heureE = info.event.end.getHours();
+                    let minutesE = info.event.end.getMinutes();
+                    let createur = info.event.extendedProps.createur;
+
+
+
+                    //   console.log('Evenement : '+ info.event.title + ' ' + dateS + '/' + moisS + '/' + anneeS + ' à ' + heureS + ':' + minutesS );
+                   alert('Event: ' + info.event.title +  '\n '
+                       + 'Debut :  ' + dateS + '/' + moisS + '/' + anneeS + ' à ' + heureS + ':' + minutesS + '\n '
+                        + 'Fin :  ' + dateE + '/' + moisE + '/' + anneeE + ' à ' + heureE + ':' + minutesE + '\n créé par : ' + createur  );
+                    },
+                events : {{ data|raw }},
+
+
+
+            });
+            calendar.render();
+
+        });
+
+
+
+
+
+
+
+    </script>
+
+{% endblock %}

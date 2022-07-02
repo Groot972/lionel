@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}Détail Client{% endblock %}
+{% block titre %} Gestion des infos{% endblock %}
+
+{% block body %}
+
+    {% block MyformInfos %}
+        {% include 'modals/ajoutInfos.html.twig' %}
+    {% endblock %}
+
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalAjoutInfos">
+        <i class='bx bx-plus-circle'></i>  Ajouter une infos</i>
+    </button> <br><br>
+
+    <div id="cards">
+
+    </div>
+
+
+    <script>
+
+        let card = document.getElementById("cards");
+        car.forEach((item) =>{
+            let newDiv = document.createElement("div");
+            newDiv.textContent =
+                `<div class="card">
+
+                </div>`
+
+        }
+            item.marque;
+
+    </script>
+
+
+
+{% endblock %}

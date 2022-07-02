@@ -1,0 +1,107 @@
+{% block modalAjoutReparation %}
+
+    <!-- Modal Ajout d'un client -->
+    <div class="modal fade" id="modalAjoutReparation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">Ajout d'une réparation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="btn tab-link active" onclick="afficher('liste', 'lien1')" id="lien1" data-target="#liste">Liste des réparations</button>
+                        <button class="btn tab-link" onclick="afficher('new', 'lien2')" id="lien2" data-target="#new" >Nouvelle réparation</button>
+                    </div>
+                </nav>
+                {% if car.type == 'mecanique' %}
+                    {% form_theme formAjoutReparationM 'bootstrap_5_layout.html.twig' %}
+                    {% form_theme formReparationM 'bootstrap_5_layout.html.twig' %}
+                    <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-body show" id="liste">
+                        <div class="modal-body text-warning">
+                            {{ form_start(formAjoutReparationM) }}
+                            {{ form_widget(formAjoutReparationM) }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                            <button type="submit" class="btn btn-primary">Ajouter !</button>
+                        </div>
+                        {{ form_end(formAjoutReparationM) }}
+                    </div>
+
+                    <div class="tab-body" id="new">
+                        <div class="modal-body text-warning">
+
+                            {{ form_start(formReparationM) }}
+                            {{ form_widget(formReparationM) }}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                            <button type="submit" class="btn btn-primary">Ajouter !</button>
+                        </div>
+                        {{ form_end(formReparationM) }}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if car.type == 'carrosserie' %}
+                    {% form_theme formAjoutReparationC 'bootstrap_5_layout.html.twig' %}
+                    {% form_theme formReparationC 'bootstrap_5_layout.html.twig' %}
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-body show" id="liste">
+                            <div class="modal-body text-warning" >
+                                {{ form_start(formAjoutReparationC) }}
+                                {{ form_widget(formAjoutReparationC) }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                                <button type="submit" class="btn btn-primary">Ajouter !</button>
+                            </div>
+                            {{ form_end(formAjoutReparationC) }}
+                        </div>
+
+                        <div class="tab-body" id="new">
+                            <div class="modal-body text-warning">
+                                {{ form_start(formReparationC) }}
+                                {{ form_widget(formReparationC) }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abandonner</button>
+                                <button type="submit" class="btn btn-primary">Ajouter !</button>
+                            </div>
+                            {{ form_end(formReparationC) }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal Ajout d'un client -->
+
+    <script>
+
+        let links = document.querySelectorAll('.tab-link');
+        let contents = document.querySelectorAll('.tab-body');
+
+
+        /**
+         *
+         * Gerer l'affichage des onglets
+         */
+
+
+        function afficher(el, lien){
+            contents.forEach(content => {
+                content.classList.remove('show');
+            });
+            links.forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById(lien).classList.add('active');
+            document.getElementById(el).classList.add('show');
+
+        }
+
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% block modalSuppReparation %}
+
+
+<!-- Modal Suppression reparation -->
+<div class="modal fade" id="modalSupp{{ repairs.reparation.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-dark" id="exampleModalLabel">Supprimer une réparation </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-warning">
+                Êtes vous sûr de vouloir supprimer la réparation : <br> ({{ repairs.reparation.libelle }}) ?
+            </div>
+            {% if car.type == 'mecanique' %}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                <a href="{{ path('deleteReparation', {id : repairs.id })}}"><button type="submit" class="btn btn-primary">Supprimer !</button></a>
+            </div>
+            {% endif %}
+            {% if car.type == 'carrosserie' %}
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <a href="{{ path('deleteReparationC', {id : repairs.id })}}"><button type="submit" class="btn btn-primary">Supprimer !</button></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- Fin Modal suppression reparation -->
+
+{% endblock %}
