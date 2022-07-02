@@ -12,12 +12,7 @@
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/config/routes/calendar.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20220616203641.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20220620122311.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20220622124445.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20220627164607.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20220628172329.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/migrations/Version20220630234115.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/migrations/Version20220702022828.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/fullcalendar/LICENSE.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/node_modules/fullcalendar/README.md" afterDir="false" />
@@ -221,7 +216,7 @@
         <entry file="file://$PROJECT_DIR$/src/Controller/EventsController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="317">
-              <caret line="77" column="8" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="8" />
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
             </state>
           </provider>
         </entry>
@@ -589,16 +584,15 @@
       <workItem from="1656435249514" duration="7847000" />
       <workItem from="1656517837982" duration="30794000" />
       <workItem from="1656587533091" duration="29655000" />
-      <workItem from="1656722526753" duration="5884000" />
+      <workItem from="1656722526753" duration="6221000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221014000" />
+    <option name="totallyTimeSpent" value="221351000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17477204" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -937,7 +931,7 @@
     <entry file="file://$PROJECT_DIR$/src/Controller/EventsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
-          <caret line="77" column="8" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="8" />
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
         </state>
       </provider>
     </entry>
